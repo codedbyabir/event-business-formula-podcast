@@ -373,3 +373,23 @@ Author Box
     padding: 10px;
   }
 }
+
+
+/*------------------
+Podcast Summary
+------------------*/
+.ebfp-podcast-summary{
+  padding: 20px;
+  background-color: #d3d3d3a3;
+  margin: 10px;
+  border-radius: 10px;
+}
+.ebfp-podcast-summary .ebfp-podcast-summary__heading{
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.ebfp-podcast-summary .ebfp-podcast-summary__content p{
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.7em;
+}

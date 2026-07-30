@@ -58,21 +58,21 @@ class PodcastMetabox
         // Retrieve the current value of the iframe code.
         $iframe_code = get_post_meta($post->ID, '_ebfp_podcast_iframe_code', true);
 
+        // Retrieve the current value of the podcast summary.
+        $podcast_summary = get_post_meta($post->ID, '_ebfp_podcast_summary', true);
+
         // Add a nonce field for security.
         wp_nonce_field('ebfp_podcast_metabox_nonce', 'ebfp_podcast_nonce');
 
-        // Render the input field.
+        // Render the embed code field.
         echo '<label for="ebfp_podcast_iframe_code">' . esc_html__('Enter the iframe embed code for the podcast:', 'event-business-formula') . '</label>';
         echo '<textarea id="ebfp_podcast_iframe_code" name="ebfp_podcast_iframe_code" rows="5" style="width: 100%;">' . esc_textarea($iframe_code) . '</textarea>';
+
+        // Render the podcast summary field.
+        echo '<p><label for="ebfp_podcast_summary">' . esc_html__('Enter Podcast Summary:', 'event-business-formula') . '</label></p>';
+        echo '<textarea id="ebfp_podcast_summary" name="ebfp_podcast_summary" rows="5" style="width: 100%;">' . esc_textarea($podcast_summary) . '</textarea>';
     }
 
-    /**
-     * Saves the metabox data when the post is saved.
-     *
-     * @param int $post_id The ID of the current post.
-     *
-     * @since 1.0.0
-     */
     /**
      * Saves the metabox data when the post is saved.
      *
@@ -97,7 +97,7 @@ class PodcastMetabox
             return;
         }
 
-        // Check if the iframe code field is set.
+        // Save the iframe embed code field.
         if (isset($_POST['ebfp_podcast_iframe_code'])) {
             // Define allowed HTML tags and attributes for iframe.
             $allowed_html = [
@@ -117,6 +117,15 @@ class PodcastMetabox
 
             // Save the sanitized iframe code to post meta.
             update_post_meta($post_id, '_ebfp_podcast_iframe_code', $iframe_code);
+        }
+
+        // Save the podcast summary field.
+        if (isset($_POST['ebfp_podcast_summary'])) {
+            // Plain text field, strip all tags and sanitize.
+            $podcast_summary = sanitize_textarea_field($_POST['ebfp_podcast_summary']);
+
+            // Save the sanitized summary to post meta.
+            update_post_meta($post_id, '_ebfp_podcast_summary', $podcast_summary);
         }
     }
 

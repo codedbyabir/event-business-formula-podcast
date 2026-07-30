@@ -27,7 +27,7 @@ $x_url = get_the_author_meta('x', $author_id);
                         <?php echo get_avatar($author_id, 100); ?>
                     </div>
                     <div class="ebfp-author-name">By
-                        <a href="<?php echo esc_url(get_author_posts_url($author_id)); ?>">
+                        <a>
                             <?php echo esc_html(get_the_author_meta('display_name', $author_id)); ?>
                         </a>
                     </div>
@@ -110,6 +110,22 @@ $x_url = get_the_author_meta('x', $author_id);
                 ?>
 
             </div><!--/ Podcast Player -->
+
+            <!-- Podcast Summary -->
+                <?php
+                $podcast_summary = get_post_meta(get_the_ID(), '_ebfp_podcast_summary', true);
+
+                if (!empty($podcast_summary)) :
+                ?>
+                <div class="ebfp-podcast-summary">
+                    <h3 class="ebfp-podcast-summary__heading"><?php esc_html_e('Podcast Summary', 'event-business-formula'); ?></h3>
+                    <div class="ebfp-podcast-summary__content">
+                        <?php echo wpautop(esc_html($podcast_summary)); ?>
+                    </div>
+                </div>
+                <?php
+                endif;
+                ?>
             <!-- Podcast Content -->
             <div class="ebfp-podcast-content">
                 <?php the_content(); ?>
