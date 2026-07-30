@@ -118,7 +118,7 @@ $x_url = get_the_author_meta('x', $author_id);
                 if (!empty($podcast_summary)) :
                 ?>
                 <div class="ebfp-podcast-summary">
-                    <h3 class="ebfp-podcast-summary__heading"><?php esc_html_e('Podcast Summary', 'event-business-formula'); ?></h3>
+                    <h3 class="ebfp-podcast-summary__heading"><?php esc_html_e('Summary', 'event-business-formula'); ?></h3>
                     <div class="ebfp-podcast-summary__content">
                         <?php echo wpautop(esc_html($podcast_summary)); ?>
                     </div>
